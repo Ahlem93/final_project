@@ -153,7 +153,7 @@ exports.getallusers=async (req, res) => {
   exports.updateuser=(req, res) => {
     try {
     user.findOneAndUpdate({ _id: req.params.id }, req.body);
-    res.json({ msg: "data fetched", users });
+    res.json({ msg: "user updated"});
   } catch (error) {
     console.log(error); 
   }};

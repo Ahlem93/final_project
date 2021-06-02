@@ -26,7 +26,6 @@ const userSchema = new Schema({
         type: Number,
         required: false,
       },
-      socialMedia: {
         facebook: {
           type: String
         },
@@ -35,8 +34,7 @@ const userSchema = new Schema({
         },
         linkedin: {
           type: String
-        }
-      },
+        },
       registrationDate: { type: Date, default: Date.now 
       }, 
       lastLogin:  { type: Date, default: Date.now

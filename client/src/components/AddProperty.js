@@ -1,11 +1,79 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {useDropzone} from 'react-dropzone'
 
 import { addProperty } from "../actions/property";
 
 
 
 const AddProperty = (props) => {
+
+
+    const thumbsContainer = {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 16
+      };
+      
+      const thumb = {
+        display: 'inline-flex',
+        borderRadius: 2,
+        border: '1px solid #eaeaea',
+        marginBottom: 8,
+        marginRight: 8,
+        width: 100,
+        height: 100,
+        padding: 4,
+        boxSizing: 'border-box'
+      };
+      
+      const thumbInner = {
+        display: 'flex',
+        minWidth: 0,
+        overflow: 'hidden'
+      };
+      
+      const img = {
+        display: 'block',
+        width: 'auto',
+        height: '100%'
+      };
+
+  const [files, setFiles] = useState([]);
+  const {getRootProps, getInputProps} = useDropzone({
+    accept: 'image/*',
+    onDrop: acceptedFiles => {
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      })));
+      acceptedFiles.map(file =>{
+        let data = new FormData();
+        console.log(file);
+            console.log(data)
+      })
+    console.log(images);
+    }
+  });
+
+  const thumbs = files.map(file => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img
+          src={file.preview}
+          style={img}
+        />
+      </div>
+    </div>
+  ));
+
+  useEffect(() => () => {
+    // Make sure to revoke the data uris to avoid memory leaks
+    files.forEach(file => URL.revokeObjectURL(file.preview));
+  }, [files]);
+
+
+
     const  [propertytitle , setPropertyTitle] = useState('');
     const  [bedrooms , setBedrooms] = useState('');
     const  [description , setDescription] = useState('');
@@ -13,6 +81,7 @@ const AddProperty = (props) => {
     const  [surface , setSurface] = useState('');
     const  [address , setAddress] = useState('');
     const  [city , setCity] = useState('');
+    const [images , setImages] = useState('');
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
@@ -46,11 +115,9 @@ const AddProperty = (props) => {
         const city  = e.target.value;
         setCity(city );
       };
-    
-
    const handleAddProperty = (e) => {
         e.preventDefault();
-        dispatch(addProperty(propertytitle, bedrooms, city,address , surface ,price , description ))
+        dispatch(addProperty(propertytitle, bedrooms, city,address , surface ,price, description ))
         .then(() => {
           console.log('success');
           props.history.push("/");
@@ -166,7 +233,7 @@ const AddProperty = (props) => {
                                 <div class="submit-section">
                                     <div class="row">
                                     
-                                        <div class="form-group col-md-12">
+                                        {/* <div class="form-group col-md-12">
                                             <label>Upload Gallery</label>
                                             <form action="/upload-target" class="dropzone dz-clickable primary-dropzone">
                                                 <div class="dz-default dz-message">
@@ -174,7 +241,19 @@ const AddProperty = (props) => {
                                                     <span>Drag and Drop To Change Logo</span>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </div> */}
+
+                                        <section className="container">
+                                            <div {...getRootProps({className: 'dropzone'})}>
+                                                <input {...getInputProps()} />
+                                                <p>Drag 'n' drop some files here, or click to select files</p>
+                                            </div>
+                                            <aside style={thumbsContainer}>
+                                                {thumbs}
+                                            </aside>
+                                            </section>
+
+
                                         
                                     </div>
                                 </div>

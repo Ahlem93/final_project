@@ -1,5 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+
+
+import { getPropertyByID , getCommentsByProperties } from "../actions/property";
+import Comment from "./Comments";
 const Property = () => {
+const location  = useLocation();
+const history = useHistory();
+const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(location.state); // result: 'some_value'
+    if(location.state){
+      let propertyId = location.state.propertyId;
+      dispatch(getPropertyByID(propertyId));
+      dispatch(getCommentsByProperties(propertyId))
+    }else{
+      history.push('/')
+    }
+   
+
+ }, [location]);
+ const { properties } = useSelector(state => state.property);
+ const { comments } = useSelector(state => state.comment);
+
+ console.log(comments);
 
   return (
     <div>
@@ -10,10 +36,9 @@ const Property = () => {
 					
 							<div class="property_block_wrap style-4">
 								<div class="prt-detail-title-desc">
-									<span class="prt-types sale">For Sale</span>
-									<h3 class="text-light">Jannat Graynight Mood In Siver Colony, London</h3>
-									<span><i class="lni-map-marker"></i> 778 Country St. Panama City, FL</span>
-									<h3 class="prt-price-fix">$7,600<sub>/month</sub></h3>
+									<h3 class="text-light">{properties.propertytitle}</h3>
+									<span><i class="lni-map-marker"></i> {properties.address} {properties.city}</span>
+									<h3 class="prt-price-fix">{properties.price} DT<sub>/month</sub></h3>
 									<div class="pbwts-social">
 										<ul>
 											<li>Share:</li>
@@ -200,11 +225,7 @@ const Property = () => {
         </div>
         
         <div className="property_block_wrap style-2">
-          
-          <div className="property_block_wrap_header">
-            <a data-bs-toggle="collapse" data-parent="#clSev" data-bs-target="#clSev" aria-controls="clOne" href="javascript:void(0);" aria-expanded="true" className="collapsed"><h4 className="property_block_title">Gallery</h4></a>
-          </div>
-          
+                  
           <div id="clSev" className="panel-collapse collapse">
             <div className="block-body">
               <ul className="list-gallery-inline">
@@ -283,7 +304,7 @@ const Property = () => {
         <div className="property_block_wrap style-2">
           
           <div className="property_block_wrap_header">
-            <a data-bs-toggle="collapse" data-parent="#rev" data-bs-target="#clEight" aria-controls="clEight" href="javascript:void(0);" aria-expanded="true"><h4 className="property_block_title">102 Reviews</h4></a>
+            <a data-bs-toggle="collapse" data-parent="#rev" data-bs-target="#clEight" aria-controls="clEight" href="javascript:void(0);" aria-expanded="true"><h4 className="property_block_title">{comments.length} Review</h4></a>
           </div>
           
           <div id="clEight" className="panel-collapse collapse show">
@@ -292,42 +313,28 @@ const Property = () => {
                 <div className="comment-list">
                   <ul>
                     <li className="article_comments_wrap">
-                      <article>
-                        <div className="article_comments_thumb">
-                          <img src="assets/img/user-1.jpg" alt=""/>
-                        </div>
-                        <div className="comment-details">
-                          <div className="comment-meta">
-                            <div className="comment-left-meta">
-                              <h4 className="author-name">Rosalina Kelian</h4>
-                              <div className="comment-date">19th May 2018</div>
+                      {comments ? comments.map(comment => {
+                        return(
+                          <article>
+                          <div className="article_comments_thumb">
+                            <img src="assets/img/user-1.jpg" alt=""/>
+                          </div>
+                          <div className="comment-details">
+                            <div className="comment-meta">
+                              <div className="comment-left-meta">
+                                <h4 className="author-name">{comment.messageTitle}</h4>
+                                <div className="comment-date">{comment.createdDate}</div>
+                              </div>
+                            </div>
+                            <div className="comment-text">
+                              <p>{comment.message}</p>
                             </div>
                           </div>
-                          <div className="comment-text">
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
-                              perspiciatis unde omnis iste natus error.</p>
-                          </div>
-                        </div>
-                      </article>
-                    </li>
-                    <li className="article_comments_wrap">
-                      <article>
-                        <div className="article_comments_thumb">
-                          <img src="assets/img/user-5.jpg" alt=""/>
-                        </div>
-                        <div className="comment-details">
-                          <div className="comment-meta">
-                            <div className="comment-left-meta">
-                              <h4 className="author-name">Rosalina Kelian</h4>
-                              <div className="comment-date">19th May 2018</div>
-                            </div>
-                          </div>
-                          <div className="comment-text">
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
-                              perspiciatis unde omnis iste natus error.</p>
-                          </div>
-                        </div>
-                      </article>
+                        </article>
+  
+                        )
+                      }): 
+                      console.log('error')}
                     </li>
                   </ul>
                 </div>
@@ -338,179 +345,8 @@ const Property = () => {
           
         </div>
 
-        <div className="property_block_wrap style-2">
-          
-          <div className="property_block_wrap_header">
-            <a data-bs-toggle="collapse" data-parent="#nearby" data-bs-target="#clNine" aria-controls="clNine" href="javascript:void(0);" aria-expanded="true"><h4 className="property_block_title">Nearby</h4></a>
-          </div>
-          
-          <div id="clNine" className="panel-collapse collapse show">
-            <div className="block-body">
-              
-              <div className="nearby-wrap">
-                <div className="nearby_header">
-                  <div className="nearby_header_first">
-                    <h5>Schools Around</h5>
-                  </div>
-                  <div className="nearby_header_last">
-                    <div className="nearby_powerd">
-                      Powerd by <img src="assets/img/edu.png" className="img-fluid" alt=""/>
-                    </div>
-                  </div>
-                </div>
-                <div className="neary_section_list">
-                
-                  <div className="neary_section">
-                    <div className="neary_section_first">
-                      <h4 className="nearby_place_title">Green Iseland School<small>(3.52 mi)</small></h4>
-                    </div>
-                    <div className="neary_section_last">
-                      <div className="nearby_place_rate">
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star"></i>														
-                      </div>
-                      <small className="reviews-count">(421 Reviews)</small>
-                    </div>
-                  </div>
-                  
-                  <div className="neary_section">
-                    <div className="neary_section_first">
-                      <h4 className="nearby_place_title">Ragni Intermediate College<small>(0.52 mi)</small></h4>
-                    </div>
-                    <div className="neary_section_last">
-                      <div className="nearby_place_rate">
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star-half filled"></i>														
-                      </div>
-                      <small className="reviews-count">(470 Reviews)</small>
-                    </div>
-                  </div>
-                  
-                  <div className="neary_section">
-                    <div className="neary_section_first">
-                      <h4 className="nearby_place_title">Rose Wood Primary Scool<small>(0.47 mi)</small></h4>
-                    </div>
-                    <div className="neary_section_last">
-                      <div className="nearby_place_rate">
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star"></i>														
-                      </div>
-                      <small className="reviews-count">(204 Reviews)</small>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-              
-              <div className="nearby-wrap">
-                <div className="nearby_header">
-                  <div className="nearby_header_first">
-                    <h5>Food Around</h5>
-                  </div>
-                  <div className="nearby_header_last">
-                    <div className="nearby_powerd">
-                      Powerd by <img src="assets/img/food.png" className="img-fluid" alt=""/>
-                    </div>
-                  </div>
-                </div>
-                <div className="neary_section_list">
-                
-                  <div className="neary_section">
-                    <div className="neary_section_first">
-                      <h4 className="nearby_place_title">The Rise hotel<small>(2.42 mi)</small></h4>
-                    </div>
-                    <div className="neary_section_last">
-                      <div className="nearby_place_rate">
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>														
-                      </div>
-                      <small className="reviews-count">(105 Reviews)</small>
-                    </div>
-                  </div>
-                  
-                  <div className="neary_section">
-                    <div className="neary_section_first">
-                      <h4 className="nearby_place_title">Blue Ocean Bar & Restaurant<small>(1.52 mi)</small></h4>
-                    </div>
-                    <div className="neary_section_last">
-                      <div className="nearby_place_rate">
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star filled"></i>
-                        <i className="fa fa-star"></i>														
-                      </div>
-                      <small className="reviews-count">(40 Reviews)</small>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-              
-            </div>
-          </div>
-          
-        </div>
-      
-        <div className="property_block_wrap style-2">
-          
-          <div className="property_block_wrap_header">
-            <a data-bs-toggle="collapse" data-parent="#comment" data-bs-target="#clTen" aria-controls="clTen" href="javascript:void(0);" aria-expanded="true"><h4 className="property_block_title">Write a Review</h4></a>
-          </div>
-          
-          <div id="clTen" className="panel-collapse collapse show">
-            <div className="block-body">
-              <form className="simple-form">
-                <div className="row">
-                  
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="form-group">
-                      <textarea className="form-control ht-80" placeholder="Messages"></textarea>
-                    </div>
-                  </div>
-                  
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="form-group">
-                      <input type="text" className="form-control" placeholder="Property Title"/>
-                    </div>
-                  </div>
-                  
-                  <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="form-group">
-                      <input type="text" className="form-control" placeholder="Your Name"/>
-                    </div>
-                  </div>
-                  
-                  <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="form-group">
-                      <input type="email" className="form-control" placeholder="Your Email"/>
-                    </div>
-                  </div>
-                  
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="form-group">
-                      <button className="btn btn-theme-light-2 rounded" type="submit">Submit Review</button>
-                    </div>
-                  </div>
-                  
-                </div>
-              </form>
-            </div>
-          </div>
-          
-        </div>
+        <Comment props={properties}/>
+  
         
       </div>
       

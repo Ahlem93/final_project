@@ -1,6 +1,24 @@
-import React from "react";
-const Search = () => {
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import { searchProperty } from "../actions/property";
 
+   
+const Search = () => {
+    const location  = useLocation();
+    const history = useHistory();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        console.log(location.state);
+        if(location.state){
+          let searchproperties = location.state.ahlem;
+          dispatch(searchProperty(searchproperties));
+        }else{
+          history.push('/')
+        }
+     }, [location]);
+     const { properties } = useSelector(state => state.property);
+     console.log(properties);
   return (
     <div>
 <div className="page-title">
@@ -420,7 +438,10 @@ const Search = () => {
             
             <div className="row">
          
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                           
+                {properties ? properties.map((property) => {
+                    return(
+                        <div className="col-lg-6 col-md-6 col-sm-12">
                     <div className="property-listing property-2">
                         
                         <div className="listing-img-wrapper">
@@ -436,7 +457,7 @@ const Search = () => {
                         <div className="listing-detail-wrapper">
                             <div className="listing-short-detail-wrap">
                                 <div className="listing-short-detail">
-                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">New Clue Apartment</a></h4>
+                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">{property.propertytitle}</a></h4>
                                     <div className="property-reviews">
                                         <i className="fas fa-star filled"></i>
                                         <i className="fas fa-star filled"></i>
@@ -476,294 +497,14 @@ const Search = () => {
                         
                     </div>
                 </div>
-           
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="property-listing property-2">
-                        
-                        <div className="listing-img-wrapper">
-                            <div className="list-img-slide">
-                                <div className="click">
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-1.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-2.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-3.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-wrapper">
-                            <div className="listing-short-detail-wrap">
-                                <div className="listing-short-detail">
-                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">New Clue Apartment</a></h4>
-                                    <div className="property-reviews">
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div className="listing-short-detail-flex">
-                                    <h6 className="listing-card-info-price">$7,000</h6>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="price-features-wrapper">
-                            <div className="list-fx-features">
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt=""/></div>3 Beds
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt=""/></div>1 Bath
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt=""/></div>800 sqft
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-footer">
-                            <div className="footer-first">
-                                <div className="foot-location"><img src="assets/img/pin.svg" width="18" alt=""/>210 Zirak Road, Canada</div>
-                            </div>
-                            <div className="footer-flex">
-                                <a href="property-detail.html" className="prt-view">View</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-        
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="property-listing property-2">
-                        
-                        <div className="listing-img-wrapper">
-                            <div className="list-img-slide">
-                                <div className="click">
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-1.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-2.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-3.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-wrapper">
-                            <div className="listing-short-detail-wrap">
-                                <div className="listing-short-detail">
-                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">New Clue Apartment</a></h4>
-                                    <div className="property-reviews">
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div className="listing-short-detail-flex">
-                                    <h6 className="listing-card-info-price">$7,000</h6>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="price-features-wrapper">
-                            <div className="list-fx-features">
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt=""/></div>3 Beds
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt=""/></div>1 Bath
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt=""/></div>800 sqft
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-footer">
-                            <div className="footer-first">
-                                <div className="foot-location"><img src="assets/img/pin.svg" width="18" alt=""/>210 Zirak Road, Canada</div>
-                            </div>
-                            <div className="footer-flex">
-                                <a href="property-detail.html" className="prt-view">View</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-            
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="property-listing property-2">
-                        
-                        <div className="listing-img-wrapper">
-                            <div className="list-img-slide">
-                                <div className="click">
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-1.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-2.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-3.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-wrapper">
-                            <div className="listing-short-detail-wrap">
-                                <div className="listing-short-detail">
-                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">New Clue Apartment</a></h4>
-                                    <div className="property-reviews">
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div className="listing-short-detail-flex">
-                                    <h6 className="listing-card-info-price">$7,000</h6>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="price-features-wrapper">
-                            <div className="list-fx-features">
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt=""/></div>3 Beds
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt=""/></div>1 Bath
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt=""/></div>800 sqft
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-footer">
-                            <div className="footer-first">
-                                <div className="foot-location"><img src="assets/img/pin.svg" width="18" alt=""/>210 Zirak Road, Canada</div>
-                            </div>
-                            <div className="footer-flex">
-                                <a href="property-detail.html" className="prt-view">View</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-             
-        
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="property-listing property-2">
-                        
-                        <div className="listing-img-wrapper">
-                            <div className="list-img-slide">
-                                <div className="click">
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-1.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-2.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-3.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-wrapper">
-                            <div className="listing-short-detail-wrap">
-                                <div className="listing-short-detail">
-                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">New Clue Apartment</a></h4>
-                                    <div className="property-reviews">
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div className="listing-short-detail-flex">
-                                    <h6 className="listing-card-info-price">$7,000</h6>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="price-features-wrapper">
-                            <div className="list-fx-features">
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt=""/></div>3 Beds
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt=""/></div>1 Bath
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt=""/></div>800 sqft
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-footer">
-                            <div className="footer-first">
-                                <div className="foot-location"><img src="assets/img/pin.svg" width="18" alt=""/>210 Zirak Road, Canada</div>
-                            </div>
-                            <div className="footer-flex">
-                                <a href="property-detail.html" className="prt-view">View</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+                    )
+              }): 
+              console.log('error')
               
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="property-listing property-2">
-                        
-                        <div className="listing-img-wrapper">
-                            <div className="list-img-slide">
-                                <div className="click">
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-1.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-2.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                    <div><a href="single-property-1.html"><img src="assets/img/p-3.jpg" className="img-fluid mx-auto" alt=""/></a></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-wrapper">
-                            <div className="listing-short-detail-wrap">
-                                <div className="listing-short-detail">
-                                    <h4 className="listing-name verified"><a href="single-property-1.html" className="prt-link-detail">New Clue Apartment</a></h4>
-                                    <div className="property-reviews">
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star filled"></i>
-                                        <i className="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div className="listing-short-detail-flex">
-                                    <h6 className="listing-card-info-price">$7,000</h6>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="price-features-wrapper">
-                            <div className="list-fx-features">
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt=""/></div>3 Beds
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt=""/></div>1 Bath
-                                </div>
-                                <div className="listing-card-info-icon">
-                                    <div className="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt=""/></div>800 sqft
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="listing-detail-footer">
-                            <div className="footer-first">
-                                <div className="foot-location"><img src="assets/img/pin.svg" width="18" alt=""/>210 Zirak Road, Canada</div>
-                            </div>
-                            <div className="footer-flex">
-                                <a href="property-detail.html" className="prt-view">View</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-               
+                }
+                       
+              
+                
             </div>
             
         

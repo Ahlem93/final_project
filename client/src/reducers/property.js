@@ -2,7 +2,11 @@ import {
     FEATURED_PROPERTIES_SUCCESS,
     FEATURED_PROPERTIES_FAIL,
     ADD_PROPERTY_SUCCESS,
-    ADD_PROPERTY_FAIL
+    ADD_PROPERTY_FAIL,
+    GET_PROPERTY_SUCCESS,
+    GET_PROPERTY_FAIL,
+    SEARCH_PROPERTIES_SUCCESS,
+    SEARCH_PROPERTIES_FAIL
   } from "../actions/types";
 
     const properties = [];
@@ -35,6 +39,27 @@ import {
           return {
             ...state,
           };
+        case GET_PROPERTY_SUCCESS:
+          return {
+            ...state,
+            properties : payload,
+          };
+        case GET_PROPERTY_FAIL:
+          return {
+            ...state,
+          };
+          case SEARCH_PROPERTIES_SUCCESS:
+            return {
+              ...state,
+              isProperty: true,
+              properties: payload,
+            };
+          case SEARCH_PROPERTIES_FAIL:
+            return {
+              ...state,
+              isProperty: false,
+              properties: null,
+            };
 
         default:
           return state;

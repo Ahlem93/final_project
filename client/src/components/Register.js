@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 
 import Form from "react-validation/build/form";
@@ -62,6 +62,8 @@ const Register = (props) => {
   const [role, setRole] = useState("");
   const [successful, setSuccessful] = useState(false);
 
+
+  const history  = useHistory();
   const { message } = useSelector(state => state.message);
   const dispatch = useDispatch();
 
@@ -103,9 +105,7 @@ const Register = (props) => {
       dispatch(register(username, email, password,passwordConfirmation , role))
         .then(() => {
           setSuccessful(true);
-          props.history.push("/");
-
-
+          history.push("/login");
         })
         .catch(() => {
           setSuccessful(false);

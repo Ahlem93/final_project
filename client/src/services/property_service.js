@@ -6,26 +6,51 @@ const getFeaturedProperty = () => {
     return axios.get(API_URL + "get-featured");
 };
 
-const addPropertyService = (propertytitle, bedrooms, city,address , surface ,price , description) => {
+const addPropertyService = (propertytitle, bedrooms, city,address , surface ,price , description  ) => {
   let user = JSON.parse(localStorage.getItem('user'));
   const token = user.token;
 
   return  axios.post(API_URL+"addproperty",{
-    propertytitle, bedrooms, city,address , surface ,price , description
+    propertytitle, bedrooms, city,address , surface ,price , description 
     } ,  {
       headers: {
         'x-auth-token':token,
-        'Accept' : 'application/json',
-        'Content-Type': 'application/json'
-    }})
+    } , 
+  })
 }
 
 // const searchProperty = () => {
 //     return axios.get(API_URL + "get-featured");
 // }
+const getPropertyByID = (id) => {
+  return axios.post(API_URL + "single-property",{id});
+};
+const searchProperties= (city) => {
+  return axios.post(API_URL + "search-properties",{city});
+};
+
+const addComment = (messageTitle , message , propertyId) => {
+  let user = JSON.parse(localStorage.getItem('user'));
+  const token = user.token;
+
+  return axios.post(API_URL + "add-comment",{messageTitle , message , propertyId},{
+    headers: {
+      'x-auth-token':token,
+  } , 
+});
+}
+
+const getCommentsByProperty = (property) => {
+  console.log(property);
+  return axios.post(API_URL + "get-comments",{property});
+}
 
 export default {
     getFeaturedProperty,
-    addPropertyService
+    addPropertyService,
+    getPropertyByID,
+    searchProperties,
+    addComment,
+    getCommentsByProperty
   };
   

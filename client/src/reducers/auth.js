@@ -5,7 +5,8 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     EDIT_PROFILE_SUCCESS,
-    EDIT_PROFILE_FAIL
+    EDIT_PROFILE_FAIL,
+   
   } from "../actions/types";
   
   const user = JSON.parse(localStorage.getItem("user"));
