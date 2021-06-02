@@ -1,6 +1,8 @@
 import {
     FEATURED_PROPERTIES_SUCCESS,
     FEATURED_PROPERTIES_FAIL,
+    ADD_PROPERTY_SUCCESS,
+    ADD_PROPERTY_FAIL
   } from "../actions/types";
 
     const properties = [];
@@ -25,10 +27,18 @@ import {
             isProperty: false,
             properties: null,
           };
+        case ADD_PROPERTY_SUCCESS:
+          return {
+            ...state,
+          };
+        case ADD_PROPERTY_FAIL:
+          return {
+            ...state,
+          };
+
         default:
           return state;
       }
   
   }
-
 

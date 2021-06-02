@@ -16,6 +16,8 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import AddProperty from "./components/AddProperty";
+import Property from "./components/property";
+import Search from "./components/search";
 
 
 function App() {
@@ -52,6 +54,9 @@ function App() {
         <Route path="/register" render={() => <Register/>} />
         <Route path="/login" render={() => <Login/>} />
         <Route path="/add-property" render={() => <AddProperty/>} />
+        <Route path="/editProfile" render={() => <Profile/>} />
+        <Route path="/Property" render={() => <Property/>} />
+        <Route path="/search" render={() => <Search/>} />
         </Switch>
        
         </BrowserRouter>

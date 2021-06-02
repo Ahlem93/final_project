@@ -4,6 +4,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
+    EDIT_PROFILE_SUCCESS,
+    EDIT_PROFILE_FAIL
   } from "../actions/types";
   
   const user = JSON.parse(localStorage.getItem("user"));
@@ -44,7 +46,15 @@ import {
           isLoggedIn: false,
           user: null,
         };
+        case EDIT_PROFILE_SUCCESS:
+          return {
+            ...state,
+          };
+        case EDIT_PROFILE_FAIL:
+          return {
+            ...state,
+          };
       default:
         return state;
-    }
+    };
   }

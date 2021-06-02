@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import { login } from "../actions/auth";
+import Header from "./header";
 
 const required = (value) => {
   if (!value) {
@@ -61,12 +62,12 @@ const Login = (props) => {
       setLoading(false);
     }
   };
-
   if (isLoggedIn) {
     return <Redirect to="/" />;
-  }
+  } 
 
   return (
+    <div className="blue-skin">
     <div className="col-md-12">
       <div className="card card-container">
         <img
@@ -119,6 +120,7 @@ const Login = (props) => {
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
+    </div>
     </div>
   );
 };

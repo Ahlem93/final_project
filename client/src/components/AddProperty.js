@@ -1,10 +1,65 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import UserService from "../services/user.service";
+import { addProperty } from "../actions/property";
 
 
 
-const AddProperty = () => {
+const AddProperty = (props) => {
+    const  [propertytitle , setPropertyTitle] = useState('');
+    const  [bedrooms , setBedrooms] = useState('');
+    const  [description , setDescription] = useState('');
+    const  [price , setPrice] = useState('');
+    const  [surface , setSurface] = useState('');
+    const  [address , setAddress] = useState('');
+    const  [city , setCity] = useState('');
+    const { message } = useSelector(state => state.message);
+    const dispatch = useDispatch();
+
+    const onChangePropertyTitle = (e) => {
+        const propertytitle = e.target.value;
+        setPropertyTitle(propertytitle);
+      };
+    
+      const onChangeBedrooms = (e) => {
+        const bedrooms = e.target.value;
+        setBedrooms(bedrooms);
+      };
+    
+      const onChangeDescription = (e) => {
+        const description = e.target.value;
+        setDescription(description);
+      };
+      const onChangePrice  = (e) => {
+        const price  = e.target.value;
+        setPrice(price );
+      };
+      const onChangeSurface   = (e) => {
+        const surface   = e.target.value;
+        setSurface(surface  );
+      };
+      const onChangeAddress  = (e) => {
+        const address  = e.target.value;
+        setAddress(address );
+      };
+      const onChangeCity  = (e) => {
+        const city  = e.target.value;
+        setCity(city );
+      };
+    
+
+   const handleAddProperty = (e) => {
+        e.preventDefault();
+        dispatch(addProperty(propertytitle, bedrooms, city,address , surface ,price , description ))
+        .then(() => {
+          console.log('success');
+          props.history.push("/");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+    }
 
     return(
         <>
@@ -43,7 +98,7 @@ const AddProperty = () => {
                                     
                                         <div class="form-group col-md-12">
                                             <label>Property Title<span class="tip-topdata" data-tip="Property Title"><i class="ti-help"></i></span></label>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" class="form-control" onChange={onChangePropertyTitle} name="propertytitle"/>
                                         </div>
                                         
                                         <div class="form-group col-md-6">
@@ -70,17 +125,17 @@ const AddProperty = () => {
                                         
                                         <div class="form-group col-md-6">
                                             <label>Price</label>
-                                            <input type="text" class="form-control" placeholder="USD"/>
+                                            <input type="text" class="form-control" onChange={onChangePrice} name="price" placeholder="USD"/>
                                         </div>
                                         
                                         <div class="form-group col-md-6">
                                             <label>Area</label>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" class="form-control" onChange={onChangeSurface} name="surface"/>
                                         </div>
                                         
                                         <div class="form-group col-md-6">
                                             <label>Bedrooms</label>
-                                            <select id="bedrooms" class="form-control">
+                                            <select name="bedrooms" onChange={onChangeBedrooms} id="bedrooms" class="form-control">
                                                 <option value="">&nbsp;</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -131,24 +186,13 @@ const AddProperty = () => {
                                     
                                         <div class="form-group col-md-6">
                                             <label>Address</label>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" onChange={onChangeAddress} name="address" class="form-control"/>
                                         </div>
                                         
                                         <div class="form-group col-md-6">
                                             <label>City</label>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" name="city" onChange={onChangeCity} class="form-control"/>
                                         </div>
-                                        
-                                        <div class="form-group col-md-6">
-                                            <label>State</label>
-                                            <input type="text" class="form-control"/>
-                                        </div>
-                                        
-                                        <div class="form-group col-md-6">
-                                            <label>Zip Code</label>
-                                            <input type="text" class="form-control"/>
-                                        </div>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -157,10 +201,9 @@ const AddProperty = () => {
                                 <h3>Detailed Information</h3>
                                 <div class="submit-section">
                                     <div class="row">
-                                    
                                         <div class="form-group col-md-12">
                                             <label>Description</label>
-                                            <textarea class="form-control h-120"></textarea>
+                                            <textarea name="description" onChange={onChangeDescription} class="form-control h-120"></textarea>
                                         </div>
                                         
                                         <div class="form-group col-md-4">
@@ -293,7 +336,7 @@ const AddProperty = () => {
                             </div>
                             
                             <div class="form-group col-lg-12 col-md-12">
-                                <button class="btn btn-theme-light-2 rounded" type="submit">Submit & Preview</button>
+                                <button class="btn btn-theme-light-2 rounded" onClick={handleAddProperty} type="submit">Submit & Preview</button>
                             </div>
                                         
                         </div>

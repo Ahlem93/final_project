@@ -39,7 +39,7 @@ const Home = () => {
         .catch(() => {
         console.log('error');
         });
-	}, [properties]);
+	}, []);
   return (
     <div>
    	 <div className="image-bottom hero-banner" style={{background:'#2540a2 url(../img/banner.svg) no-repeat'}} data-overlay="0">
@@ -108,8 +108,6 @@ const Home = () => {
 				
 					<div className="row list-layout">
 						<div className="col-lg-6 col-md-12">
-						{console.log(featured)}
-
 						{featured &&
 							<div className="property-listing property-1">
 									
@@ -224,7 +222,6 @@ const Home = () => {
 					</div>
 					
 				</div>
-				<h3>{content}</h3>
 			</section>
 	
 	</div>
