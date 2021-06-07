@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { searchProperty } from "../actions/property";
+import { searchProperty } from "../../actions/property";
 
    
 const Search = () => {
@@ -11,7 +11,7 @@ const Search = () => {
     useEffect(() => {
         console.log(location.state);
         if(location.state){
-          let searchproperties = location.state.ahlem;
+          let searchproperties = location.state.city;
           dispatch(searchProperty(searchproperties));
         }else{
           history.push('/')

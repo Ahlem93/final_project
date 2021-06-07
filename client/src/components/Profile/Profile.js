@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  editProfile } from "../actions/user";
+import {  editProfile } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 
 

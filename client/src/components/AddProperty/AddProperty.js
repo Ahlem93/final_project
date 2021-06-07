@@ -2,7 +2,7 @@ import React, { useState, useEffect , useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useDropzone} from 'react-dropzone'
 
-import { addProperty } from "../actions/property";
+import { addProperty } from "../../actions/property";
 
 
 
@@ -146,13 +146,7 @@ const AddProperty = (props) => {
 			
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
                     
-                        <div class="alert alert-success" role="alert">
-                        <p>Please, Sign In before you submit a property. If you don't have an account you can create one by <a href="#">Clicking Here</a></p>
-                        </div>
-                    
-                    </div>
                     
                     <div class="col-lg-12 col-md-12">
                     

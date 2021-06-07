@@ -6,8 +6,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import { login } from "../actions/auth";
-import Header from "./header";
+import { login } from "../../actions/auth";
+import Header from "../header/header";
 
 const required = (value) => {
   if (!value) {

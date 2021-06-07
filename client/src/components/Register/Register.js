@@ -9,7 +9,7 @@ import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-import { register } from "../actions/auth";
+import { register } from "../../actions/auth";
 
 const required = (value) => {
   if (!value) {
@@ -149,7 +149,7 @@ const Register = (props) => {
                 />
               </div>
               <Select name='role' value={role} onChange={onChangeRole} validations={[required]}>
-                <option value=''>Vous êtes : </option>
+                <option value=''>You are: </option>
                 <option value='Agent'>Agent</option>
                 <option value='user'>user</option>
               </Select>

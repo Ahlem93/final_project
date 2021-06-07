@@ -1,8 +1,8 @@
 import React  from 'react';
-import SignUp from './signUp';
+import SignUp from '../signUp/signUp';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../actions/auth";
+import { logout } from "../../actions/auth";
 
 const Header = () => {
 	const { user } = useSelector(state => state.auth);

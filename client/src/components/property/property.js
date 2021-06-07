@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
 
-import { getPropertyByID , getCommentsByProperties } from "../actions/property";
-import Comment from "./Comments";
+import { getPropertyByID , getCommentsByProperties } from "../../actions/property";
+import Comment from "../Comments/Comments";
 const Property = () => {
 const location  = useLocation();
 const history = useHistory();
@@ -96,8 +96,7 @@ const dispatch = useDispatch();
           </div>
           <div id="clTwo" className="panel-collapse collapse show">
             <div className="block-body">
-              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+              
             </div>
           </div>
         </div>
@@ -252,54 +251,6 @@ const dispatch = useDispatch();
           </div>
           
         </div>
-        
-        <div className="rating-overview">
-          <div className="rating-overview-box">
-            <span className="rating-overview-box-total">4.2</span>
-            <span className="rating-overview-box-percent">out of 5.0</span>
-            <div className="star-rating" data-rating="5"><i className="ti-star"></i><i className="ti-star"></i><i className="ti-star"></i><i className="ti-star"></i><i className="ti-star"></i>
-            </div>
-          </div>
-
-          <div className="rating-bars">
-              <div className="rating-bars-item">
-                <span className="rating-bars-name">Service</span>
-                <span className="rating-bars-inner">
-                  <span className="rating-bars-rating high" data-rating="4.7">
-                    <span className="rating-bars-rating-inner" style={{width: "85%"}}></span>
-                  </span>
-                  <strong>4.7</strong>
-                </span>
-              </div>
-              <div className="rating-bars-item">
-                <span className="rating-bars-name">Value for Money</span>
-                <span className="rating-bars-inner">
-                  <span className="rating-bars-rating good" data-rating="3.9">
-                    <span className="rating-bars-rating-inner" style={{width: "75%"}}></span>
-                  </span>
-                  <strong>3.9</strong>
-                </span>
-              </div>
-              <div className="rating-bars-item">
-                <span className="rating-bars-name">Location</span>
-                <span className="rating-bars-inner">
-                  <span className="rating-bars-rating mid" data-rating="3.2">
-                    <span className="rating-bars-rating-inner" style={{width: "52.2%"}}></span>
-                  </span>
-                  <strong>3.2</strong>
-                </span>
-              </div>
-              <div className="rating-bars-item">
-                <span className="rating-bars-name">Cleanliness</span>
-                <span className="rating-bars-inner">
-                  <span className="rating-bars-rating poor" data-rating="2.0">
-                    <span className="rating-bars-rating-inner" style={{width:"20%"}}></span>
-                  </span>
-                  <strong>2.0</strong>
-                </span>
-              </div>
-          </div>
-        </div>
       
         <div className="property_block_wrap style-2">
           
@@ -386,135 +337,6 @@ const dispatch = useDispatch();
               </div>
               <button className="btn btn-black btn-md rounded full-width">Send Message</button>
             </div>
-          </div>
-          
-          <div className="sides-widget">
-
-            <div className="sides-widget-header">
-              <div className="sides-widget-details">
-                <h4><a href="#">Shivangi Preet</a></h4>
-                <span>View your Interest Rate</span>
-              </div>
-              <div className="clearfix"></div>
-            </div>
-            
-            <div className="sides-widget-body simple-form">
-              <div className="form-group">
-                <div className="input-with-icon">
-                  <input type="text" className="form-control" placeholder="Sale Price"/>
-                  <i className="ti-money"></i>
-                </div>
-              </div>
-              
-              <div className="form-group">
-                <div className="input-with-icon">
-                  <input type="text" className="form-control" placeholder="Down Payment"/>
-                  <i className="ti-money"></i>
-                </div>
-              </div>
-              
-              <div className="form-group">
-                <div className="input-with-icon">
-                  <input type="text" className="form-control" placeholder="Loan Term (Years)"/>
-                  <i className="ti-calendar"></i>
-                </div>
-              </div>
-              
-              <div className="form-group">
-                <div className="input-with-icon">
-                  <input type="text" className="form-control" placeholder="Interest Rate"/>
-                  <i className="fa fa-percent"></i>
-                </div>
-              </div>
-              
-              <button className="btn btn-black btn-md rounded full-width">Calculate</button>
-            
-            </div>
-          </div>
-      
-          <div className="sidebar-widgets">
-            
-            <h4>Featured Property</h4>
-            
-            <div className="sidebar_featured_property">
-              
-          
-              <div className="sides_list_property">
-                <div className="sides_list_property_thumb">
-                  <img src="assets/img/p-1.jpg" className="img-fluid" alt=""/>
-                </div>
-                <div className="sides_list_property_detail">
-                  <h4><a href="single-property-1.html">Loss vengel New Apartment</a></h4>
-                  <span><i className="ti-location-pin"></i>Sans Fransico</span>
-                  <div className="lists_property_price">
-                    <div className="lists_property_types">
-                      <div className="property_types_vlix sale">For Sale</div>
-                    </div>
-                    <div className="lists_property_price_value">
-                      <h4>$4,240</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-         
-              <div className="sides_list_property">
-                <div className="sides_list_property_thumb">
-                  <img src="assets/img/p-4.jpg" className="img-fluid" alt=""/>
-                </div>
-                <div className="sides_list_property_detail">
-                  <h4><a href="single-property-1.html">Montreal Quriqe Apartment</a></h4>
-                  <span><i className="ti-location-pin"></i>Liverpool, London</span>
-                  <div className="lists_property_price">
-                    <div className="lists_property_types">
-                      <div className="property_types_vlix">For Rent</div>
-                    </div>
-                    <div className="lists_property_price_value">
-                      <h4>$7,380</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-            
-              <div className="sides_list_property">
-                <div className="sides_list_property_thumb">
-                  <img src="assets/img/p-7.jpg" className="img-fluid" alt=""/>
-                </div>
-                <div className="sides_list_property_detail">
-                  <h4><a href="single-property-1.html">Curmic Studio For Office</a></h4>
-                  <span><i className="ti-location-pin"></i>Montreal, Canada</span>
-                  <div className="lists_property_price">
-                    <div className="lists_property_types">
-                      <div className="property_types_vlix buy">For Buy</div>
-                    </div>
-                    <div className="lists_property_price_value">
-                      <h4>$8,730</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="sides_list_property">
-                <div className="sides_list_property_thumb">
-                  <img src="assets/img/p-5.jpg" className="img-fluid" alt=""/>
-                </div>
-                <div className="sides_list_property_detail">
-                  <h4><a href="single-property-1.html">Montreal Quebec City</a></h4>
-                  <span><i className="ti-location-pin"></i>Sreek View, New York</span>
-                  <div className="lists_property_price">
-                    <div className="lists_property_types">
-                      <div className="property_types_vlix">For Rent</div>
-                    </div>
-                    <div className="lists_property_price_value">
-                      <h4>$6,240</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-            
           </div>
         
         </div>

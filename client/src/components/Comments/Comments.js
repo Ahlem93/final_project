@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { addComment } from "../actions/property";
+import { addComment } from "../../actions/property";
 
 const Comment  = (props) => {
     console.log(props.props._id);
