@@ -1,13 +1,19 @@
 import React, { useState, useEffect , useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useDropzone} from 'react-dropzone'
+import {useDropzone} from 'react-dropzone';
+import { useHistory, useLocation } from "react-router-dom";
+
 
 import { addProperty } from "../../actions/property";
+import SweetAlert from 'react-bootstrap-sweetalert';
+import swal from 'sweetalert';
+
 
 
 
 const AddProperty = (props) => {
 
+    const history = useHistory();
 
     const thumbsContainer = {
         display: 'flex',
@@ -120,7 +126,14 @@ const AddProperty = (props) => {
         dispatch(addProperty(propertytitle, bedrooms, city,address , surface ,price, description ))
         .then(() => {
           console.log('success');
-          props.history.push("/");
+          swal({
+            title: "Done!",
+            text: "user is added to database",
+            icon: "success",
+            timer: 2000,
+            button: false
+          })
+          history.push('/')
         })
         .catch((e) => {
           console.log(e);

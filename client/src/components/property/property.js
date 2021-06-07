@@ -10,8 +10,10 @@ const location  = useLocation();
 const history = useHistory();
 const dispatch = useDispatch();
 
+const { comments } = useSelector(state => state.comment);
+
+
   useEffect(() => {
-    console.log(location.state); // result: 'some_value'
     if(location.state){
       let propertyId = location.state.propertyId;
       dispatch(getPropertyByID(propertyId));
@@ -19,13 +21,13 @@ const dispatch = useDispatch();
     }else{
       history.push('/')
     }
-   
-
  }, [location]);
  const { properties } = useSelector(state => state.property);
- const { comments } = useSelector(state => state.comment);
 
- console.log(comments);
+ useEffect(()=>{
+
+ },[comments])
+
 
   return (
     <div>
@@ -255,7 +257,7 @@ const dispatch = useDispatch();
         <div className="property_block_wrap style-2">
           
           <div className="property_block_wrap_header">
-            <a data-bs-toggle="collapse" data-parent="#rev" data-bs-target="#clEight" aria-controls="clEight" href="javascript:void(0);" aria-expanded="true"><h4 className="property_block_title">{comments.length} Review</h4></a>
+            <a data-bs-toggle="collapse" data-parent="#rev" data-bs-target="#clEight" aria-controls="clEight" href="javascript:void(0);" aria-expanded="true"><h4 className="property_block_title">{ comments ? comments.length : ""} Review</h4></a>
           </div>
           
           <div id="clEight" className="panel-collapse collapse show">
