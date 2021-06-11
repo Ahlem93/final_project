@@ -12,7 +12,9 @@ import {
     ADD_COMMENT_SUCCESS,
     ADD_COMMENT_FAIL,
     GET_COMMENTS_SUCCESS,
-    GET_COMMENTS_FAIL
+    GET_COMMENTS_FAIL,
+    GET_AGENTPROPERTY_SUCCESS,
+    GET_AGENTPROPERTY_FAIL
   } from "./types";
 
   import PropertyService from "../services/property_service";
@@ -227,5 +229,40 @@ export const getCommentsByProperties = (id) => (dispatch) => {
   
         return Promise.reject();
       }
-  );
-};
+  )}
+    export const PropertyByUser = () => (dispatch) => {
+      return PropertyService.getPropertyByUser().then(
+          (response) =>{
+            dispatch({
+                type: GET_AGENTPROPERTY_SUCCESS,
+                payload : response.data.agentProperties
+              });
+        
+              dispatch({
+                type: SET_MESSAGE,
+                payload: response,
+              });
+        
+              return Promise.resolve();
+          },
+          (error) => {
+            const message =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+      
+            dispatch({
+              type: GET_AGENTPROPERTY_FAIL,
+            });
+      
+            dispatch({
+              type: SET_MESSAGE,
+              payload: message,
+            });
+      
+            return Promise.reject();
+          }
+      );
+  };

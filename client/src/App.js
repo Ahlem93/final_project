@@ -19,6 +19,7 @@ import AddProperty from "./components/AddProperty/AddProperty";
 import Property from "./components/property/property";
 import Search from "./components/search/search";
 import Pages from "./components/pages/pages";
+import BoardUser from "./components/BoardUser/BoardUser";
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
         <Route path="/Property" render={() => <Property/>} />
         <Route path="/search" render={() => <Search/>} />
         <Route path="/pages" render={() => <Pages/>} />
+        <Route path="/dashbordAgent" render={() => <BoardUser/>} />
         </Switch>
        
         </BrowserRouter>

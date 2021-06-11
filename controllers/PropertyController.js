@@ -166,7 +166,7 @@ exports.addComment = async (req , res) =>  {
       message : message,
     });    
     const comment = await newComment.save();
-    res.json({ msg: "property added", comment });
+    res.json({ msg: "comment added", comment });
 
   }catch(error) {
     console.log(error)
@@ -179,6 +179,16 @@ exports.getCommentsByProperty = async (req,res) => {
     console.log(id);
     const comments = await Comment.find({property : id});
     res.json({comments});
+  } catch (error) {
+    console.log(error);
+  }
+}
+exports.getPropertyByUser = async (req,res) => {
+  const userId = req.user.id;
+  console.log(req.user.id);
+  try {
+    const agentProperties= await property.find({user : userId});
+    res.json({agentProperties});
   } catch (error) {
     console.log(error);
   }

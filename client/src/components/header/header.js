@@ -13,7 +13,7 @@ const Header = () => {
 	  };
     return (
 	<div>
-		<div className="header blue-skin header-transparent change-logo">
+		<div className="header blue-skin  change-logo">
 				<div className="container">
 					<nav id="navigation" className="navigation navigation-landscape">
 						<div className="nav-header">
@@ -29,10 +29,15 @@ const Header = () => {
 							}
 							
 							
-							<ul className="nav-menu nav-menu-social align-to-right">
+							<ul className="nav-menu ">
 								{user && user.message.role === 'Agent' &&
 									<li>
-										<a href="/add-property" className="text-success"><img src="../img/submit.svg" width="20" alt="" className="mr-2" />Add Property</a>
+										<a href="/dashbordAgent" data-bs-toggle="modal" data-bs-target="#dashbord">My dashbord</a>
+									</li>
+								}
+								{user && user.message.role === 'Agent' &&
+									<li>
+										<a href="/add-property" data-bs-toggle="modal" data-bs-target="#login"><img src="../img/submit.svg" width="20" alt="" className="mr-2" />Add Property</a>
 									</li>
 								}
 								
@@ -47,8 +52,8 @@ const Header = () => {
 									</li>
                                 }
 								{isLoggedIn &&
-								<li>
-									<a href="/" onClick={logOut}><img src="./img/off.svg" class="mr-2" width="17" alt=""/>Sign Out</a>
+								<li className="align-to-right">
+									<a  href="/" onClick={logOut}><img src="./img/off.svg" class="mr-2" width="17" alt=""/>Sign Out</a>
 								</li>
 							    }
 							</ul>

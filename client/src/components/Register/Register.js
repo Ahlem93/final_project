@@ -148,13 +148,13 @@ const Register = (props) => {
                   validations={[required, validEmail]}
                 />
               </div>
-              <Select name='role' value={role} onChange={onChangeRole} validations={[required]}>
-                <option value=''>You are: </option>
+              <div className="form-group">
+                <label htmlFor="option">You are:</label>
+              <Select  className="form-control" name='role' value={role} onChange={onChangeRole} validations={[required]}>
                 <option value='Agent'>Agent</option>
                 <option value='user'>user</option>
               </Select>
-
-
+              </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <Input

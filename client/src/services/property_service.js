@@ -45,12 +45,23 @@ const getCommentsByProperty = (property) => {
   return axios.post(API_URL + "get-comments",{property});
 }
 
+const getPropertyByUser = () => {
+  let user = JSON.parse(localStorage.getItem('user'));
+  const token = user.token;
+  return axios.get(API_URL + "dashbordAgent",{
+  headers: {
+    'x-auth-token':token,
+} , 
+});
+}
+
 export default {
     getFeaturedProperty,
     addPropertyService,
     getPropertyByID,
     searchProperties,
     addComment,
-    getCommentsByProperty
+    getCommentsByProperty,
+    getPropertyByUser
   };
   

@@ -38,7 +38,7 @@ const Home = () => {
 		console.log(cityInput);
 		history.push({
 			pathname : '/search',
-			state : {ahlem : cityInput}
+			state : {city : cityInput}
 		})
 	}
 
@@ -113,6 +113,7 @@ const Home = () => {
 					</div>
 				
 					<div className="row list-layout">
+						
 						{properties ? properties.map((property)=> {
 						
 								console.log(property.surface)

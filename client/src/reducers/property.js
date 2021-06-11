@@ -6,7 +6,9 @@ import {
     GET_PROPERTY_SUCCESS,
     GET_PROPERTY_FAIL,
     SEARCH_PROPERTIES_SUCCESS,
-    SEARCH_PROPERTIES_FAIL
+    SEARCH_PROPERTIES_FAIL,
+    GET_AGENTPROPERTY_SUCCESS,
+    GET_AGENTPROPERTY_FAIL
   } from "../actions/types";
 
     const properties = [];
@@ -61,9 +63,20 @@ import {
               properties: null,
             };
 
+            case GET_AGENTPROPERTY_SUCCESS:
+              return {
+                ...state,
+                isProperty: true,
+                properties: payload,
+              };
+            case GET_AGENTPROPERTY_FAIL:
+              return {
+                ...state,
+                isProperty: false,
+                properties: null,
+              };
         default:
           return state;
       }
-  
   }
 
