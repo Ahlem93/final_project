@@ -55,6 +55,16 @@ const getPropertyByUser = () => {
 });
 }
 
+const removeProperty = (id) => {
+  let user = JSON.parse(localStorage.getItem('user'));
+  const token = user.token;
+  return axios.post(API_URL + "delete-property",{id},{
+    headers: {
+      'x-auth-token':token,
+  } , 
+  });
+}
+
 export default {
     getFeaturedProperty,
     addPropertyService,
@@ -62,6 +72,7 @@ export default {
     searchProperties,
     addComment,
     getCommentsByProperty,
-    getPropertyByUser
+    getPropertyByUser,
+    removeProperty
   };
   

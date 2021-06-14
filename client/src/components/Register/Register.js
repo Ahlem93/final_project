@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from 'react-router-dom';
-
+import { Redirect, useHistory } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -62,9 +61,8 @@ const Register = (props) => {
   const [role, setRole] = useState("");
   const [successful, setSuccessful] = useState(false);
 
-
-  const history  = useHistory();
-  const { message } = useSelector(state => state.message);
+  const history = useHistory();
+  const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
   const onChangeUsername = (e) => {
@@ -89,10 +87,9 @@ const Register = (props) => {
   const onChangeRole = (e) => {
     const roles = e.target.value;
     setRole(roles);
-  }
+  };
 
-  const { isLoggedIn } = useSelector(state => state.auth);
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -101,8 +98,11 @@ const Register = (props) => {
 
     form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0 && password === passwordConfirmation) {
-      dispatch(register(username, email, password,passwordConfirmation , role))
+    if (
+      checkBtn.current.context._errors.length === 0 &&
+      password === passwordConfirmation
+    ) {
+      dispatch(register(username, email, password, passwordConfirmation, role))
         .then(() => {
           setSuccessful(true);
           history.push("/login");
@@ -150,10 +150,16 @@ const Register = (props) => {
               </div>
               <div className="form-group">
                 <label htmlFor="option">You are:</label>
-              <Select  className="form-control" name='role' value={role} onChange={onChangeRole} validations={[required]}>
-                <option value='Agent'>Agent</option>
-                <option value='user'>user</option>
-              </Select>
+                <Select
+                  className="form-control"
+                  name="role"
+                  value={role}
+                  onChange={onChangeRole}
+                  validations={[required]}
+                >
+                  <option value="Agent">Agent</option>
+                  <option value="user">user</option>
+                </Select>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -186,7 +192,12 @@ const Register = (props) => {
 
           {message && (
             <div className="form-group">
-              <div className={ successful ? "alert alert-success" : "alert alert-danger" } role="alert">
+              <div
+                className={
+                  successful ? "alert alert-success" : "alert alert-danger"
+                }
+                role="alert"
+              >
                 {message}
               </div>
             </div>

@@ -36,7 +36,8 @@ const propertySchema = new  Schema({
     },
     city:{
         type: String,
-        required: true
+        required: true,
+        default : {}
     },
     createdDate: { type: Date, default: Date.now },
     updatedDate: { type: Date, default: Date.now },
@@ -44,6 +45,9 @@ const propertySchema = new  Schema({
 //       user_id: String, 
 //       userFullName: String, 
 //    }],
+    approuved: {
+        type: Boolean,
+    }
 
 });
 

@@ -11434,8 +11434,10 @@ table.property-table-wrap .property-container .title .table-property-price {
 }
 
 footer {
-	z-index: 99;
-	position: relative
+	clear: both;
+    position: relative;
+    height: 20px;
+    margin-top: -20px;
 }
 
 footer.dark-footer {

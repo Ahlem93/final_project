@@ -5,7 +5,7 @@ const isAuth = require('../middlewares/isAuth').isAuth;
 const property = require("../models/property");
 
 
-const {addproperty,getproperty,deleteproperty,editproperty, getFeaturedProperties , searchProperties,getPropertyById, upload , addComment , getCommentsByProperty,getPropertyByUser} = require("../controllers/PropertyController");
+const {addproperty,getproperty,deleteProperty,editproperty, getFeaturedProperties , searchProperties,getPropertyById, upload , addComment , getCommentsByProperty,getPropertyByUser} = require("../controllers/PropertyController");
 
 //add new property
 router.post("/addproperty",isAuth,upload.array(['image']),addproperty);
@@ -16,7 +16,7 @@ router.get("/getproperty",isAuth,getproperty);
 router.post("/single-property/",getPropertyById);
 //delete property
 
-router.delete("/deleteproperty/:_id",isAuth,deleteproperty);
+router.post("/delete-property/",isAuth,deleteProperty);
 //edit property
 
 router.put("/editproperty/:_id",isAuth,editproperty);

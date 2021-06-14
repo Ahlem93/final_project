@@ -20,6 +20,7 @@ import Property from "./components/property/property";
 import Search from "./components/search/search";
 import Pages from "./components/pages/pages";
 import BoardUser from "./components/BoardUser/BoardUser";
+import BoardAdmin from "./components/BoardAdmin/BoardAdmin";
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
   // const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   // const [showAdminBoard, setShowAdminBoard] = useState(false);
 
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,6 +52,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header/>
+        
         <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/register" render={() => <Register/>} />
@@ -61,6 +63,7 @@ function App() {
         <Route path="/search" render={() => <Search/>} />
         <Route path="/pages" render={() => <Pages/>} />
         <Route path="/dashbordAgent" render={() => <BoardUser/>} />
+        <Route path="/admin" render={() => <BoardAdmin/>}/>
         </Switch>
        
         </BrowserRouter>

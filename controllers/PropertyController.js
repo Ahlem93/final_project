@@ -73,6 +73,7 @@ try {
       address : address,
       city : city,
       date : date ,
+      approuved : false
     });    
     // router.post('/image', (req, res) => {
     //     upload(req, res, (err) => {
@@ -113,11 +114,12 @@ exports.getproperty=async (req, res) => {
     
 
 //delete property
-exports.deleteproperty=async (req, res) => {
-    const { _id } = req.params;
+exports.deleteProperty= async (req, res) => {
+    const  id = req.body.id;
+    console.log( id);
     try {
-      const property = await property.findOneAndDelete({ _id:_id });
-      res.json({ msg: "property deleted", property });
+      const deleted_property = await property.findOneAndDelete({_id : id });
+      res.json({ msg: "property deleted", deleted_property });
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +139,7 @@ exports.editproperty=async (req, res) => {
   //get Featured properties
 exports.getFeaturedProperties = async (req , res) => {
   try{
-      const properties = await property.find().sort({updatedDate : -1});
+      const properties = await property.find({approuved : true}).sort({updatedDate : -1});
       res.json({properties})
   }catch (error) {
       console.log(error);
@@ -145,10 +147,10 @@ exports.getFeaturedProperties = async (req , res) => {
 }
 //search properties
 exports.searchProperties = async (req , res) => {
-  const  city = req.body.city;
-
+  const  city = req.body;
+  console.log(city);
   try{
-      const properties = await property.find(req.body);
+      const properties = await property.find({city : req.body.city , approuved : true});
       res.json({properties})
   }catch (error) {
       console.log(error);
