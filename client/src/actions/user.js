@@ -1,4 +1,4 @@
-import { EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL, SET_MESSAGE } from "./types";
+import { EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL,GET_USERS_SUCCESS,GET_USERS_FAIL ,SET_MESSAGE } from "./types";
 
 import editprofile from "../services/user.service";
 
@@ -45,3 +45,4 @@ export const editProfile =
         }
       );
   };
+

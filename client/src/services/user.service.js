@@ -31,7 +31,7 @@ const editProfileService = (name, about, city,email , mobile ,facebook , twitter
       'Accept' : 'application/json',
       'Content-Type': 'application/json'
   }})
-}
+};
 
 export default {
   getPublicContent,
