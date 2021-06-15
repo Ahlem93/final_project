@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "16.0.0"
+ },
   "scripts": {
     "client": "npm start --prefix client",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:5000",
   "author": "",
@@ -29,6 +32,7 @@
     "react-bootstrap": "^1.6.0",
     "react-router-dom": "^5.2.0",
     "reactstrap": "^8.9.0",
+    "redux-devtools-extension": "^2.13.9",
     "validator": "^13.6.0"
   },
   "devDependencies": {
