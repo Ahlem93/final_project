@@ -6,7 +6,7 @@ const path = require ('path')
 const app=express()
 require ('dotenv').config()
 
-const whitelist = ['http://localhost:3000', 'http://localhost:5000']
+const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
