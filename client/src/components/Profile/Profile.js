@@ -10,11 +10,13 @@ const Profile = (props) => {
   const [facebook, setFacebook] = useState("");
   const [twitter, setTwitter] = useState("");
   const [linkedin, setLinkedin] = useState("");
-  const [city, setCity] = useState("");
+  const [role, setRole] = useState("");
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-
+  console.log(
+    user
+  );
   const onChangeName = (e) => {
     const name = e.target.value;
     setName(name);
@@ -45,14 +47,14 @@ const Profile = (props) => {
     const linkedin = e.target.value;
     setLinkedin(linkedin);
   };
-  const onChangeCity = (e) => {
-    const city = e.target.value;
-    setCity(city);
+  const onChangeRole = (e) => {
+    const role = e.target.value;
+    setRole(role);
   };
   const handleEditProfile = (e) => {
     e.preventDefault();
     dispatch(
-      editProfile(name, about, city, email, mobile, facebook, twitter, linkedin)
+      editProfile(name, about,role, email, mobile, facebook, twitter, linkedin)
     )
       .then(() => {
         console.log("success");
@@ -67,17 +69,18 @@ const Profile = (props) => {
       <div className="page-title">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12 col-md-12">
+            <div className="col-lg-9 col-md-9">
               <h2 className="ipt-title">Welcome!</h2>
               <span className="ipn-subtitle">Welcome To Your Account</span>
             </div>
           </div>
         </div>
       </div>
-      <section className="bg-light">
+      <div style={{textAlign:"center"}}>
+      <section className="bg-light dashboard-wraper">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-12 col-md-12">
+            <div className="col-lg-9 col-md-12">
               <div className="filter_search_opt">
                 <a href="javascript:void(0);" onclick="openFilterSearch()">
                   Dashboard Navigation<i className="ml-2 ti-menu"></i>
@@ -87,7 +90,7 @@ const Profile = (props) => {
           </div>
         </div>
 
-        <div className="col-lg-9 col-md-12">
+        <div className="container">
           <div className="dashboard-wraper">
             <div className="form-submit">
               <h4>My Account</h4>
@@ -97,6 +100,7 @@ const Profile = (props) => {
                     <label>Your Name</label>
                     <input
                       type="text"
+                      placeholder={user.message.name}
                       onChange={onChangeName}
                       name="name"
                       className="form-control"
@@ -107,6 +111,7 @@ const Profile = (props) => {
                     <label>Email</label>
                     <input
                       type="email"
+                      value={user.message.email}
                       onChange={onChangeEmail}
                       name="email"
                       className="form-control"
@@ -114,14 +119,10 @@ const Profile = (props) => {
                   </div>
 
                   <div className="form-group col-md-6">
-                    <label>Your Title</label>
-                    <input type="text" className="form-control" />
-                  </div>
-
-                  <div className="form-group col-md-6">
                     <label>Phone</label>
                     <input
                       type="text"
+                      value={user.message.mobile}
                       onChange={onChangeMobile}
                       name="mobile"
                       className="form-control"
@@ -129,28 +130,14 @@ const Profile = (props) => {
                   </div>
 
                   <div className="form-group col-md-6">
-                    <label>Address</label>
-                    <input type="text" className="form-control" />
-                  </div>
-
-                  <div className="form-group col-md-6">
-                    <label>City</label>
+                    <label>You are:</label>
                     <input
                       type="text"
-                      onChange={onChangeCity}
-                      name="city"
+                      value={user.message.role}
+                      onChange={onChangeRole}
+                      name="role"
                       className="form-control"
                     />
-                  </div>
-
-                  <div className="form-group col-md-6">
-                    <label>State</label>
-                    <input type="text" className="form-control" />
-                  </div>
-
-                  <div className="form-group col-md-6">
-                    <label>Zip</label>
-                    <input type="text" className="form-control" />
                   </div>
 
                   <div className="form-group col-md-12">
@@ -167,18 +154,20 @@ const Profile = (props) => {
                 <div className="row">
                   <div className="form-group col-md-6">
                     <label>Facebook</label>
+                    
                     <input
                       type="text"
+                      value={user.message.facebook}
                       onChange={onChangeFacebook}
                       name="facebook"
                       className="form-control"
                     />
                   </div>
-                </div>
-                <div className="form-group col-md-6">
+                  <div className="form-group col-md-6">
                   <label>Twitter</label>
                   <input
                     type="email"
+                    value={user.message.twitter}
                     onChange={onChangeTwitter}
                     name="twitter"
                     className="form-control"
@@ -186,19 +175,19 @@ const Profile = (props) => {
                 </div>
 
                 <div className="form-group col-md-6">
-                  <label>Google Plus</label>
-                  <input type="text" className="form-control" />
-                </div>
-
-                <div className="form-group col-md-6">
                   <label>LinkedIn</label>
                   <input
                     type="text"
+                    value={user.message.linkedin}
                     onChange={onChangeLinkedin}
                     name="linkedin"
                     className="form-control"
                   />
                 </div>
+                </div>
+                
+
+                
 
                 <div className="form-group col-lg-12 col-md-12">
                   <button
@@ -214,13 +203,7 @@ const Profile = (props) => {
           </div>
         </div>
       </section>
-      <section className="theme-bg call-to-act-wrap">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12"></div>
-          </div>
-        </div>
-      </section>
+    </div>
     </div>
   );
 };

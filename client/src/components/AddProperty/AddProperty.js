@@ -118,20 +118,27 @@ const AddProperty = (props) => {
     const city = e.target.value;
     setCity(city);
   };
+  const onChangeImage = (e) => {
+    const photo  =  e.target.files[0];
+    setImages(photo);
+}
+
   const handleAddProperty = (e) => {
     e.preventDefault();
-    dispatch(
-      addProperty(
-        propertytitle,
-        bedrooms,
-        city,
-        address,
-        surface,
-        price,
-        description
-      )
-    )
-      .then(() => {
+    const formData = new FormData();
+    formData.set('propertytitle' ,propertytitle  );
+    formData.set('bedrooms' ,bedrooms  );
+    formData.set('city' ,city  );
+    formData.set('address' ,address  );
+    formData.set('surface' ,surface  );
+   formData.set('price' ,price  );
+    formData.set('description' ,description  );
+    formData.set('photos' ,images );
+   for (var [key, value] of formData.entries()) {
+       console.log(key, value);
+   }
+
+   dispatch(addProperty(formData))  .then(() => {
         console.log("success");
         swal({
           title: "Done!",
@@ -163,6 +170,7 @@ const AddProperty = (props) => {
         <div class="container">
           <div class="row">
             <div class="col-lg-12 col-md-12">
+              <form onSubmit={handleAddProperty} encType="multipart/form-data">
               <div class="submit-page">
                 <div class="form-submit">
                   <h3>Basic Information</h3>
@@ -273,14 +281,12 @@ const AddProperty = (props) => {
                                         </div> */}
 
                       <section className="container">
-                        <div {...getRootProps({ className: "dropzone" })}>
-                          <input {...getInputProps()} />
-                          <p>
-                            Drag 'n' drop some files here, or click to select
-                            files
-                          </p>
-                        </div>
-                        <aside style={thumbsContainer}>{thumbs}</aside>
+                      <input
+                                                type="file"
+                                                accept=".png, .jpg, .jpeg"
+                                                name="photos"
+                                                onChange={onChangeImage}
+                                            />
                       </section>
                     </div>
                   </div>
@@ -546,13 +552,13 @@ const AddProperty = (props) => {
                 <div class="form-group col-lg-12 col-md-12">
                   <button
                     class="btn btn-theme-light-2 rounded"
-                    onClick={handleAddProperty}
                     type="submit"
                   >
                     Submit & Preview
                   </button>
                 </div>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

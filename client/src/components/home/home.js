@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { featuredProperty } from "../../actions/property";
 import { login } from "../../actions/auth";
 import { useHistory } from "react-router";
-
+// import "../../../../public/images/properties"
 const Home = () => {
   const [featured, setFeatured] = useState([]);
   const [cityInput, setCityInput] = useState("");
@@ -88,8 +88,8 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-6 col-md-5 col-sm-12 p-0 elio">
-                      <div className="form-group">
+                    {/* <div className="col-lg-6 col-md-5 col-sm-12 p-0 elio">
+                      <div className="form-group"> */}
                         <div className="input-with-icon">
                           <input
                             type="text"
@@ -99,8 +99,8 @@ const Home = () => {
                           />
                           <img src="../img/pin.svg" width="20" />
                         </div>
-                      </div>
-                    </div>
+                      {/* </div>
+                    </div> */}
 
                     <div className="col-lg-2 col-md-3 col-sm-12">
                       <div className="form-group">
@@ -110,9 +110,9 @@ const Home = () => {
                         >
                           Search
                         </button>
-                      </div>
+                      {/* </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@ const Home = () => {
                         <div className="listing-img-wrapper">
                           <a href="single-property-2.html">
                             <img
-                              src="css/img/p-1.jpg"
+                              src={`/img/properties/${property.image}`}
                               className="img-fluid mx-auto"
                               alt=""
                             />

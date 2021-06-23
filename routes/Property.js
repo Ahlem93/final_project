@@ -8,7 +8,7 @@ const property = require("../models/property");
 const {addproperty,getproperty,deleteProperty,editproperty, getFeaturedProperties , searchProperties,getPropertyById, upload , addComment , getCommentsByProperty,getPropertyByUser} = require("../controllers/PropertyController");
 
 //add new property
-router.post("/addproperty",isAuth,upload.array(['image']),addproperty);
+router.post("/addproperty",isAuth,upload.array(['photos']),addproperty);
 //get properties
 
 router.get("/getproperty",isAuth,getproperty);

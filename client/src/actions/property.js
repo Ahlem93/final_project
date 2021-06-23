@@ -57,16 +57,10 @@ export const featuredProperty = () => (dispatch) => {
   );
 };
 export const addProperty =
-  (propertyTitle, bedrooms, city, address, surface, price, description) =>
+  (formData) =>
   (dispatch) => {
     return PropertyService.addPropertyService(
-      propertyTitle,
-      bedrooms,
-      city,
-      address,
-      surface,
-      price,
-      description
+      formData
     ).then(
       (response) => {
         dispatch({

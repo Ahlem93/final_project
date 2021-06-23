@@ -6,20 +6,20 @@ const path = require ('path')
 const app=express()
 require ('dotenv').config()
 
-const whitelist = ['http://localhost:3000']
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
-    } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.use(cors(corsOptions))
+// const whitelist = ['http://localhost:3000']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     console.log("** Origin of request " + origin)
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       console.log("Origin acceptable")
+//       callback(null, true)
+//     } else {
+//       console.log("Origin rejected")
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+app.use(cors())
 connectDB()
 
 app.use(bodyParser.json());
@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use("/api/user/", require("./routes/User"));
 // app.use("/api/profile/", require("./routes/Profile"));
 app.use("/api/property/", require("./routes/Property"));
+app.use("/api/admin/", require("./routes/Admin"));
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

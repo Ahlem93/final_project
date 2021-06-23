@@ -4,7 +4,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: ((req, file, callback) => {
-    callback(null, 'public/images/properties');
+    callback(null, 'client/public/img/properties');
   }),
   filename(req, file, callback) {
     console.log(file);
@@ -25,7 +25,7 @@ exports.upload = multer({
 
 //add new property
 exports.addproperty = async(req, res,) => {
-const { propertytitle ,bedrooms,description,price,surface,address,city,date} = req.body;
+const { propertytitle ,bedrooms,description,price,surface,address,city,date,photos} = req.body;
 try {
     let errors = [];
   if (!propertytitle) {
@@ -73,6 +73,7 @@ try {
       address : address,
       city : city,
       date : date ,
+      image : req.files[0].filename , 
       approuved : false
     });    
     // router.post('/image', (req, res) => {
@@ -111,6 +112,17 @@ exports.getproperty=async (req, res) => {
       console.log(error);
     }
   }
+
+
+  exports.approuveProperty = async(req, res) => {
+    const  id = req.body.id;
+    console.log(id);
+    const singleProperty = await property.findById(id);
+    console.log(singleProperty);
+     singleProperty.approuved = true;
+     singleProperty.save();
+     res.json({msg : 'property approuved'});
+  }
     
 
 //delete property
@@ -140,6 +152,14 @@ exports.editproperty=async (req, res) => {
 exports.getFeaturedProperties = async (req , res) => {
   try{
       const properties = await property.find({approuved : true}).sort({updatedDate : -1});
+      res.json({properties})
+  }catch (error) {
+      console.log(error);
+  }
+}
+exports.getAllPropertiesByAdmin = async (req , res) => {
+  try{
+      const properties = await property.find().sort({updatedDate : -1});
       res.json({properties})
   }catch (error) {
       console.log(error);

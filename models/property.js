@@ -36,8 +36,7 @@ const propertySchema = new  Schema({
     },
     city:{
         type: String,
-        required: true,
-        default : {}
+        required: false,
     },
     createdDate: { type: Date, default: Date.now },
     updatedDate: { type: Date, default: Date.now },

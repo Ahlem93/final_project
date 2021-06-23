@@ -161,7 +161,7 @@ const BoardUser = () => {
                                         <div className="listing-card-info-icon">
                                           <div className="inc-fleat-icon">
                                             <img
-                                              src="assets/img/bed.svg"
+                                              src="https://i.pinimg.com/originals/6b/39/de/6b39debeaa76e79d7cb0bf91f98444c0.jpg"
                                               width="13"
                                               alt=""
                                             />
@@ -187,6 +187,15 @@ const BoardUser = () => {
                                           <i className="ti-location-pin"></i>
                                           {property.address} {property.city}
                                         </span>
+                                          <div>{property.approuved === true ?
+                                            <span>
+                                              approuved
+                                            </span>
+                                            :
+                                            <span>
+                                              not approuved
+                                            </span>
+                                          }</div>
                                         </div>
                                       </div>
                                       <div className="listing-detail-btn">

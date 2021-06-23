@@ -6,15 +6,14 @@ const getFeaturedProperty = () => {
     return axios.get(API_URL + "get-featured");
 };
 
-const addPropertyService = (propertytitle, bedrooms, city,address , surface ,price , description  ) => {
+const addPropertyService = (formData ) => {
   let user = JSON.parse(localStorage.getItem('user'));
   const token = user.token;
 
-  return  axios.post(API_URL+"addproperty",{
-    propertytitle, bedrooms, city,address , surface ,price , description 
-    } ,  {
+  return  axios.post(API_URL+"addproperty",formData,  {
       headers: {
         'x-auth-token':token,
+        'Content-Type' : 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL'
     } , 
   })
 }

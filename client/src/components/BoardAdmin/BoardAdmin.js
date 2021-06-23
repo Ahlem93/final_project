@@ -26,7 +26,7 @@ const BoardAdmin = () => {
                       <div class="d-navigation">
                         <ul>
                           <li>
-                            <a href="/admin/users">
+                            <a href="/admin/allusers">
                               <i class="ti-bookmark"></i>users
                             </a>
                           </li>
@@ -54,7 +54,10 @@ const BoardAdmin = () => {
                       path="/admin/properties"
                       render={() => <PropertyAdmin />}
                     />
-                    <Route path="/admin/users" render={() => <UsersAdmin />} />
+                    <Route
+                      path="/admin/allusers"
+                      render={() => <UsersAdmin />}
+                    />
                   </Switch>
                 </BrowserRouter>
               </div>
